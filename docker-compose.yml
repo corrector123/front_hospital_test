@@ -1,0 +1,27 @@
+version: '3'
+services:
+  webapp:
+    build: .
+    image: corrector123/hospital_webapp:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=hospitaldb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=zsqdqc555!
+  db:
+    image: corrector123/hopsital_db:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: zsqdqc555!
+      MYSQL_DATABASE: hospitaldb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
