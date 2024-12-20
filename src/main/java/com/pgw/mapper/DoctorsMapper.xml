@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pgw.mapper.DoctorsMapper">
+
+    <select id="querydoctor" resultMap="getDoctorInfo">
+        select *from doctors d left join departments dt on d.department_id = dt.department_id
+        left join professional_titles pt on d.professional_title_id = pt.id
+
+        <where>
+            <if test="doctorId !=null and doctorId!=''">
+                and d.doctor_id = #{doctorId}
+            </if>
+            <if test="jobNumber !=null and jobNumber!=''">
+                and d.job_number = #{jobNumber}
+            </if>
+            <if test="name !=null and name!=''">
+                and d.name like concat("%",#{name},"%")
+            </if>
+            <if test="avator !=null and avator!=''">
+                and d.avator = #{avator}
+            </if>
+            <if test="phone !=null and phone!=''">
+                and d.phone = #{phone}
+            </if>
+            <if test="email !=null and email!=''">
+                and d.email = #{email}
+            </if>
+            <if test="introduction !=null and introduction!=''">
+                and d.introduction = #{introduction}
+            </if>
+            <if test="registrationFee !=null and registrationFee!=''">
+                and d.registration_fee = #{registrationFee}
+            </if>
+            <if test="entryDate !=null and entryDate!=''">
+                and d.entrydate = #{entryDate}
+            </if>
+            <if test="departmentId !=null and departmentId!=''">
+                and d.department_id = #{departmentId}
+            </if>
+            <if test="professionalTitleId !=null and professionalTitleId!=''">
+                and d.professional_title_id = #{professionalTitleId}
+            </if>
+        </where>
+
+    </select>
+
+
+    <resultMap id="getDoctorInfo" type="com.pgw.pojo.Doctors" autoMapping="true">
+        <id property="doctorId" column="doctor_id"></id>
+        <association property="department" javaType="com.pgw.pojo.Departments" autoMapping="true"></association>
+        <association property="professionalTitle" javaType="com.pgw.pojo.ProfessionalTitles" autoMapping="true"></association>
+    </resultMap>
+
+
+    <select id="querydoctorlist" resultMap="getDoctorInfo">
+        select *from doctors d left join departments dt on d.department_id = dt.department_id
+        left join professional_titles pt on d.professional_title_id = pt.id
+
+        <where>
+            <if test="doctorId !=null and doctorId!=''">
+                and d.doctor_id = #{doctorId}
+            </if>
+            <if test="jobNumber !=null and jobNumber!=''">
+                and d.job_number = #{jobNumber}
+            </if>
+            <if test="name !=null and name!=''">
+                and d.name like concat("%",#{name},"%")
+            </if>
+            <if test="avator !=null and avator!=''">
+                and d.avator = #{avator}
+            </if>
+            <if test="phone !=null and phone!=''">
+                and d.phone = #{phone}
+            </if>
+            <if test="email !=null and email!=''">
+                and d.email = #{email}
+            </if>
+            <if test="introduction !=null and introduction!=''">
+                and d.introduction = #{introduction}
+            </if>
+            <if test="registrationFee !=null and registrationFee!=''">
+                and d.registration_fee = #{registrationFee}
+            </if>
+            <if test="entryDate !=null and entryDate!=''">
+                and d.entrydate = #{entryDate}
+            </if>
+            <if test="departmentId !=null and departmentId!=''">
+                and d.department_id = #{departmentId}
+            </if>
+            <if test="professionalTitleId !=null and professionalTitleId!=''">
+                and d.professional_title_id = #{professionalTitleId}
+            </if>
+        </where>
+
+    </select>
+</mapper>

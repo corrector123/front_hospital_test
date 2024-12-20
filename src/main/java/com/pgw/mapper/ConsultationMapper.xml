@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pgw.mapper.ConsultationMapper">
+    <select id="queryconsultation" resultMap="getConsultationInfo">
+            select *from consultation c left join doctors d on c.doctor_id = d.doctor_id
+            left join departments de on d.department_id = de.department_id
+        <where>
+            <if test="consultationId !=null and consultationId!=''">
+                and c.consultation_id = #{consultationId}
+            </if>
+            <if test="patientId !=null and patientId!=''">
+                and c.patient_id = #{patientId}
+            </if>
+            <if test="doctorId !=null and doctorId!=''">
+                and c.doctor_id = #{doctorId}
+            </if>
+            <if test="isHospitalRegistered !=null and isHospitalRegistered!=''">
+                and c.is_hospital_registered = #{isHospitalRegistered}
+            </if>
+            <if test="isHospitalized !=null and isHospitalized!=''">
+                and c.is_hospitalized = #{isHospitalized}
+            </if>
+            <if test="appointmentId !=null and appointmentId!=''">
+                and c.appointment_id = #{appointmentId}
+            </if>
+        </where>
+        order by c.consultation_time desc
+    </select>
+
+
+    <resultMap id="getConsultationInfo" type="com.pgw.pojo.Consultation" autoMapping="true">
+        <id property="consultationId" column="consultation_id"></id>
+        <association property="doctors" javaType="com.pgw.pojo.Doctors" autoMapping="true"></association>
+        <association property="doctors.department" javaType="com.pgw.pojo.Departments" autoMapping="true"></association>
+        <association property="doctors.professionalTitle" javaType="com.pgw.pojo.ProfessionalTitles" autoMapping="true"></association>
+    </resultMap>
+
+    <select id="queryconsultationlist" resultMap="getConsultationInfo">
+        select *from consultation c left join doctors d on c.doctor_id = d.doctor_id
+        left join departments de on d.department_id = de.department_id
+        <where>
+            <if test="consultationId !=null and consultationId!=''">
+                and c.consultation_id = #{consultationId}
+            </if>
+            <if test="patientId !=null and patientId!=''">
+                and c.patient_id = #{patientId}
+            </if>
+            <if test="doctorId !=null and doctorId!=''">
+                and c.doctor_id = #{doctorId}
+            </if>
+            <if test="isHospitalRegistered !=null and isHospitalRegistered!=''">
+                and c.is_hospital_registered = #{isHospitalRegistered}
+            </if>
+            <if test="isHospitalized == 0 || isHospitalized== 1">
+                and c.is_hospitalized = #{isHospitalized}
+            </if>
+            <if test="appointmentId !=null and appointmentId!=''">
+                and c.appointment_id = #{appointmentId}
+            </if>
+        </where>
+        order by c.consultation_time desc
+    </select>
+
+</mapper>

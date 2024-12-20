@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pgw.mapper.HospitalizationMapper">
+
+    <select id="queryhospitalization" resultType="com.pgw.pojo.Hospitalization">
+       select *from hospitalization h
+
+        <where>
+            <if test="hospitalizationId !=null and hospitalizationId !=''">
+                and h.hospitalization_id = #{hospitalizationId}
+            </if>
+            <if test="patientId !=null and patientId !=''">
+                and h.patient_id = #{patientId}
+            </if>
+            <if test="roomNumber !=null and roomNumber !=''">
+                and h.room_number = #{roomNumber}
+            </if>
+            <if test="cost !=null and cost !=''">
+                and h.cost = #{cost}
+            </if>
+            <if test="paymentStatus !=null and paymentStatus !=''">
+                and h.payment_status = #{paymentStatus}
+            </if>
+            <if test="isInsured !=null and isInsured !=''">
+                and h.is_insured = #{isInsured}
+            </if>
+            <if test="hospitalizationStatus !=null and hospitalizationStatus !=''">
+                and h.hospitalization_status = #{hospitalizationStatus}
+            </if>
+            <if test="consultationId !=null and consultationId !=''">
+                and h.consultation_id = #{consultationId}
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="queryhospitalizationlist" resultType="com.pgw.pojo.Hospitalization">
+        select *from hospitalization h
+
+        <where>
+            <if test="hospitalizationId !=null and hospitalizationId !=''">
+                and h.hospitalization_id = #{hospitalizationId}
+            </if>
+            <if test="patientId !=null and patientId !=''">
+                and h.patient_id = #{patientId}
+            </if>
+            <if test="roomNumber !=null and roomNumber !=''">
+                and h.room_number = #{roomNumber}
+            </if>
+            <if test="cost !=null and cost !=''">
+                and h.cost = #{cost}
+            </if>
+            <if test="paymentStatus !=null and paymentStatus !=''">
+                and h.payment_status = #{paymentStatus}
+            </if>
+            <if test="isInsured !=null and isInsured !=''">
+                and h.is_insured = #{isInsured}
+            </if>
+            <if test="hospitalizationStatus !=null and hospitalizationStatus !=''">
+                and h.hospitalization_status = #{hospitalizationStatus}
+            </if>
+            <if test="consultationId !=null and consultationId !=''">
+                and h.consultation_id = #{consultationId}
+            </if>
+        </where>
+    </select>
+</mapper>

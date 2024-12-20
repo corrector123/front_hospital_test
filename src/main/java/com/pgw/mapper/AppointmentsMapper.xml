@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pgw.mapper.AppointmentsMapper">
+
+    <select id="queryappoint" resultMap="getAppointInfo">
+        select *from appointments a left join doctors d on a.doctor_id = d.doctor_id
+        left join professional_titles pt on d.professional_title_id = pt.id
+        left join departments dt on d.department_id = dt.department_id
+        left join patients p on p.patient_id = a.patient_id
+        <where>
+            <if test="doctorname !=null and doctorname!=''">
+                and d.name like concat("%",#{doctorname},"%")
+            </if>
+            <if test="departname !=null and departname!=''">
+                and dt.department_name = #{departname}
+            </if>
+            <if test="status !=null and status!=''">
+                and a.status = #{status}
+            </if>
+                and a.patient_id = #{i}
+        </where>
+        order by appointment_date desc
+    </select>
+
+
+    <resultMap id="getAppointInfo" type="com.pgw.pojo.Appointments" autoMapping="true">
+        <id property="appointmentId" column="appointment_id"></id>
+        <association property="doctors" javaType="com.pgw.pojo.Doctors" autoMapping="true"></association>
+        <association property="doctors.department" javaType="com.pgw.pojo.Departments" autoMapping="true"></association>
+        <association property="doctors.professionalTitle" javaType="com.pgw.pojo.ProfessionalTitles" autoMapping="true"></association>
+    </resultMap>
+
+</mapper>

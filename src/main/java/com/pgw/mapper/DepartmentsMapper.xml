@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pgw.mapper.DepartmentsMapper">
+
+    <select id="querydepartment" resultType="com.pgw.pojo.Departments">
+        select *from departments d
+        <where>
+            <if test="departmentId !=null and departmentId!=''">
+                and d.department_id = #{departmentId}
+            </if>
+            <if test="departmentName !=null and departmentName!=''">
+                and d.department_name like concat("%",#{departmentName},"%")
+            </if>
+            <if test="departmentPid !=null and departmentPid!=''">
+                and d.department_pid = #{departmentPid}
+            </if>
+            <if test="departmentLevel !=null and departmentLevel!=''">
+                and d.department_level = #{departmentLevel}
+            </if>
+            <if test="departmentDescription !=null and departmentDescription!=''">
+                and d.department_description like concat("%",#{departmentDescription},"%")
+            </if>
+        </where>
+
+    </select>
+
+    <select id="querydepartmentlist" resultType="com.pgw.pojo.Departments">
+        select *from departments d
+        <where>
+            <if test="departmentId !=null and departmentId!=''">
+                and d.department_id = #{departmentId}
+            </if>
+            <if test="departmentName !=null and departmentName!=''">
+                and d.department_name like concat("%",#{departmentName},"%")
+            </if>
+            <if test="departmentPid !=null and departmentPid!=''">
+                and d.department_pid = #{departmentPid}
+            </if>
+            <if test="departmentLevel !=null and departmentLevel!=''">
+                and d.department_level = #{departmentLevel}
+            </if>
+            <if test="departmentDescription !=null and departmentDescription!=''">
+                and d.department_description like concat("%",#{departmentDescription},"%")
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

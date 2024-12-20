@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--配置Mapper接口的全限定的名称-->
+<mapper namespace="com.pgw.mapper.AnnouncementMapper">
+    <select id="getAnnounceList" resultType="com.pgw.pojo.Announcements">
+        select * from announcement
+        <where>
+            <if test="title != null and title !=''">
+                and title like concat("%",#{title},"%")
+            </if>
+            <if test="type != null and type !='-1'">
+                and type = #{type}
+            </if>
+            <if test="creator != null and creator !=''">
+                and creator = #{creator}
+            </if>
+            <if test="creationTime != null and creationTime !=''">
+                and creation_time = #{creationTime}
+            </if>
+        </where>
+    </select>
+</mapper>
